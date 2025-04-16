@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:api_implementation/pictures_screen.dart';
+import 'package:api_implementation/screens/pictures_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:api_implementation/models/posts_model.dart';
