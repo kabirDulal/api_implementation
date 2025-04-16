@@ -117,6 +117,19 @@ class _HomeScreenState extends State<HomeScreen> {
         centerTitle: true,
         backgroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
       ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+          DrawerHeader(child: Text('Welcome', style: TextStyle(color: Colors.white, fontSize: 24),)),
+          ListTile(
+            leading: const Icon(Icons.contact_mail),
+            title: const Text('Contact Us'),
+            onTap: (){},
+          )
+          ],
+        ),
+      ),
       body: _getBody(),
       bottomNavigationBar: BottomNavigationBar(
           backgroundColor: const Color.fromARGB(255, 233, 139, 132),
