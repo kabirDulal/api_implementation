@@ -49,7 +49,7 @@ class PicturesScreen extends StatefulWidget {
                   itemBuilder: (context, index) {
                     return InkWell(
                       onTap: () => {
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
+                        Navigator.push(context, MaterialPageRoute(builder: (context){
                           return ProductDetails(photo:snapshot.data![index]);
                         }))                      
                       },
