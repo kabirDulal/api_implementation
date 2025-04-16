@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:api_implementation/screens/pictures_screen.dart';
+import 'package:api_implementation/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:api_implementation/models/posts_model.dart';
@@ -31,33 +32,27 @@ class _HomeScreenState extends State<HomeScreen> {
 
   int _currentIndex = 0;
   void _onTabTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
+    if (_currentIndex == 2) {
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => const SignupScreen()),
+          (Route<dynamic> route) => false);
+    } else {
+      setState(() {
+        _currentIndex = index;
+      });
+    }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Api Course',
-          style: TextStyle(
-              color: Theme.of(context).colorScheme.onPrimary,
-              fontWeight: FontWeight.w800),
-          textAlign: TextAlign.center,
-        ),
-        centerTitle: true,
-        backgroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
-      ),
-      body:(_currentIndex == 0) ? Column(
+  Widget _getBody() {
+    if (_currentIndex == 0) {
+      return Column(
         children: [
           Expanded(
             child: FutureBuilder(
               future: getPostApi(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
-                  return const Text('Loading...');
+                  return const Center(child: CircularProgressIndicator());
                 } else {
                   return ListView.builder(
                     itemCount: postList.length,
@@ -66,9 +61,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         padding: const EdgeInsets.all(8.0),
                         child: Card(
                           shadowColor: const Color.fromARGB(255, 2, 49, 71),
-                          surfaceTintColor: const Color.fromARGB(255, 231, 9, 9),
+                          surfaceTintColor:
+                              const Color.fromARGB(255, 231, 9, 9),
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 16),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -98,17 +95,41 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           )
         ],
-      ): PicturesScreen(),
+      );
+    } else if (_currentIndex == 1) {
+      return const PicturesScreen();
+    } else {
+      return const SignupScreen();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Api Course',
+          style: TextStyle(
+              color: Theme.of(context).colorScheme.onPrimary,
+              fontWeight: FontWeight.w800),
+          textAlign: TextAlign.center,
+        ),
+        centerTitle: true,
+        backgroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
+      ),
+      body: _getBody(),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: const Color.fromARGB(255, 233, 139, 132),
-        currentIndex: _currentIndex,
-        onTap: _onTabTapped,
-        items: const [
-        BottomNavigationBarItem(
-            label: 'Card Details', icon: Icon(Icons.card_membership)),
-        BottomNavigationBarItem(
-            label: 'Pictures', icon: Icon(Icons.picture_in_picture)),
-      ]),
+          backgroundColor: const Color.fromARGB(255, 233, 139, 132),
+          currentIndex: _currentIndex,
+          onTap: _onTabTapped,
+          items: const [
+            BottomNavigationBarItem(
+                label: 'Card Details', icon: Icon(Icons.card_membership)),
+            BottomNavigationBarItem(
+                label: 'Pictures', icon: Icon(Icons.picture_in_picture)),
+            BottomNavigationBarItem(
+                label: 'Log Out', icon: Icon(Icons.logout_outlined)),
+          ]),
     );
   }
 }

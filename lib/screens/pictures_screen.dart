@@ -35,7 +35,7 @@ class PicturesScreen extends StatefulWidget {
         future: getPicturesList(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return const Text('Loading...');
+            return const Center(child: CircularProgressIndicator());
           } else {
             final pictureList = snapshot.data!;
             return Padding(
@@ -49,7 +49,7 @@ class PicturesScreen extends StatefulWidget {
                   itemBuilder: (context, index) {
                     return InkWell(
                       onTap: () => {
-                        Navigator.push(context, MaterialPageRoute(builder: (context){
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
                           return ProductDetails(photo:snapshot.data![index]);
                         }))                      
                       },
