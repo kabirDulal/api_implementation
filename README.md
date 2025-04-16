@@ -1,5 +1,7 @@
 # api_implementation
-
+login details 
+email: eve.holt@reqres.in
+password: pistol
 A new Flutter project.
 
 ## Getting Started
