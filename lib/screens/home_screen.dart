@@ -57,32 +57,37 @@ class _HomeScreenState extends State<HomeScreen> {
               future: getPostApi(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
-                  return Text('Loading...');
+                  return const Text('Loading...');
                 } else {
                   return ListView.builder(
                     itemCount: postList.length,
                     itemBuilder: (context, index) {
-                      return Card(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Title\n' + postList[index].title.toString(),
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyLarge!
-                                    .copyWith(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onSecondaryFixedVariant,
-                                    ),
-                              ),
-                              Text('Description\n' +
-                                  postList[index].body.toString()),
-                            ],
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Card(
+                          shadowColor: const Color.fromARGB(255, 2, 49, 71),
+                          surfaceTintColor: const Color.fromARGB(255, 231, 9, 9),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Title\n' + postList[index].title.toString(),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge!
+                                      .copyWith(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onSecondaryFixedVariant,
+                                      ),
+                                ),
+                                Text('Description\n' +
+                                    postList[index].body.toString()),
+                              ],
+                            ),
                           ),
                         ),
                       );

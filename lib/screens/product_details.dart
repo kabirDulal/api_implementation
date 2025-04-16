@@ -7,6 +7,9 @@ class ProductDetails extends StatelessWidget{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: const IconThemeData(
+          color: Colors.white,
+        ),
         title: Text(
           'Api Course',
           style: TextStyle(
@@ -22,11 +25,49 @@ class ProductDetails extends StatelessWidget{
         centerTitle: true,
         backgroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
       ),
-      body: const Column(
-        children: [
-          Text(''),
-        ],
-      ),
+      body: Container(        
+        margin: EdgeInsets.all(16),
+        child: Column(        
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(photo.title ?? 'Product not Available',
+            style: Theme.of(context).textTheme.titleLarge!.copyWith(
+              color: Colors.black,
+              fontWeight: FontWeight.bold
+            ),
+            textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 8,),
+            Container(
+              height: 350,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12)
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: Image.network(photo.url!, fit: BoxFit.fill,)),
+              
+              ),
+            const SizedBox(height: 12,),
+            Text('Description:',
+            style: Theme.of(context).textTheme.titleLarge!.copyWith(
+              color: Colors.black,
+              fontWeight: FontWeight.bold
+            ),
+            textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 5,),
+            Text(photo.description ?? 'Product not Available',
+            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+              color: Colors.black54,
+              fontWeight: FontWeight.bold
+            ),
+            textAlign: TextAlign.left,
+            ),
+          ],
+        ),
+      ),      
     );
   }
   
