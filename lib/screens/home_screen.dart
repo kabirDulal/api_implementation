@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   int _currentIndex = 0;
   void _onTabTapped(int index) {
-    if (_currentIndex == 2) {
+    if (index == 2) {
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (context) => const SignupScreen()),
           (Route<dynamic> route) => false);
